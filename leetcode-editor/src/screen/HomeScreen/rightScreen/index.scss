@@ -1,0 +1,121 @@
+.right-screen {
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+
+  .right-header {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+
+    .title {
+      font-size: 1.7rem;
+    }
+
+    .button-header {
+      border: none;
+      background-color: white;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2px;
+      cursor: pointer;
+      span {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .folder {
+    padding: 0.7rem 0;
+
+    .folder-header {
+      padding: 1rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid black;
+
+      .folder-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .folder-tool {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 9px;
+        .button-header {
+      border: none;
+      background-color: white;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2px;
+      cursor: pointer;
+      span {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+    }
+        .material-icons {
+          font-size: 1rem;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .card-section {
+    padding: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.3rem;
+
+    .card {
+      display: flex;
+      justify-content: space-between;
+      border-radius: 10px;
+      width: 46%;
+      padding: 0.5rem;
+      box-shadow: rgb(152, 152, 152) 0px 0px 4px 0px;
+      transition: all 0.2s ease-in-out 0s;
+
+      img {
+        width: 4.5rem;
+      }
+
+      .card-data {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .card-tool {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        .material-icons {
+          font-size: 1rem;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .card:hover {
+      box-shadow: rgb(152, 152, 152) 0px 0px 8px 0px;
+      scale: 1.03;
+    }
+  }
+}
