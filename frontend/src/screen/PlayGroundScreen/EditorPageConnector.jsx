@@ -26,6 +26,7 @@ const EditorPageConnector = ({ roomId, submitCode, saveCode, handleExport }) => 
   }, [socket]);
 
   const handleEditorChange = (newCode) => {
+
     codeRef.current = newCode;
     setCode(newCode);
 

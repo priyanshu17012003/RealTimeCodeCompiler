@@ -14,7 +14,6 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log("User connected ", socket.id);
 
-  // Example for creating or joining a room
   socket.on("joinRoom", (roomId) => {
     socket.join(roomId);
     console.log(`User ${socket.id} joined room ${roomId}`);

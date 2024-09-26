@@ -28,17 +28,17 @@ const Home = () => {
       setTimeout(() => {
         setCopied(false);
       }, 2000);
-      // Redirect host to playground after copying
+      
       navigate(`/playground/${socket.id}`);
     }
   };
 
   const handleConnect = () => {
     if (socket && hostSocketId) {
-        socket.emit("joinRoom", hostSocketId); // Emit to join the same room
+        socket.emit("joinRoom", hostSocketId); 
         toast.success(`Connected to host: ${hostSocketId}`);
-        setShowConnectModal(false); // Close modal after connecting
-        navigate(`/playground/${hostSocketId}`); // Redirect to the same playground
+        setShowConnectModal(false); 
+        navigate(`/playground/${hostSocketId}`); 
     } else {
         toast.error("Please enter a valid Socket ID.");
     }

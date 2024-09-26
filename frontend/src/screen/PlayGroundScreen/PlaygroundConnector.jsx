@@ -1,14 +1,17 @@
 import { useParams } from "react-router-dom";
 import "./index.scss";
 import EditorPageConnector from "./EditorPageConnector"; 
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { createSubmission } from "./judge";
 
 const PlaygroundConnector = () => {
-  const { roomId } = useParams(); // Get roomId from params
+  const { roomId } = useParams(); 
   const [loader, setLoader] = useState(false);
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
+  const [isWarned, setIsWarned] = useState(0);
+  const navigate = useNavigate();
 
   const handleInput = (e) => {
     const file = e.target.files[0];
@@ -46,9 +49,7 @@ const PlaygroundConnector = () => {
   );
 
   const saveCode = (code) => {
-    // Implement save code functionality here
     console.log("Saving code:", code);
-    // You can add logic to save the code to a server or local storage
   };
 
   const handleExport = (code, language) => {
@@ -60,6 +61,54 @@ const PlaygroundConnector = () => {
     link.click();
   };
 
+  const enterFullScreen = () => {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      elem.msRequestFullscreen();
+    }
+  };
+
+  useEffect(() => {
+    
+    const handleFullscreenChange = () => {
+      
+      if (!document.fullscreenElement) {
+        if (isWarned === 0) {
+          //alert("You have exited fullscreen. Click 'Enter Fullscreen' to return or you may lose your session.");
+          setIsWarned(1);
+          //setTimeout(enterFullScreen, 100); // Delay to give user a moment to process
+          alert("You have exited fullscreen. Click 'Enter Fullscreen' to return or you may lose your session.");
+
+          setTimeout(()=>{
+              enterFullScreen();    
+          }, 3000)
+          
+        } else if (isWarned === 1) {
+          
+          alert("Session terminated.");
+          navigate("/"); 
+        }
+      }
+    };
+  
+    
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+  
+
+    enterFullScreen();
+  
+    return () => {
+      // Clean up event listeners on component unmount
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, [isWarned, navigate]);
+
   return (
     <div className="playground-container">
       <div className="container-header">
@@ -69,10 +118,10 @@ const PlaygroundConnector = () => {
       <div className="container-body">
         <div className="editor">
           <EditorPageConnector 
-            roomId={roomId} // Pass roomId to the editor connector
+            roomId={roomId}
             submitCode={submitCode}
-            saveCode={saveCode} // Pass save code function
-            handleExport={handleExport} // Pass export function
+            saveCode={saveCode}
+            handleExport={handleExport}
           />
         </div>
 
@@ -109,6 +158,12 @@ const PlaygroundConnector = () => {
             onChange={(e) => setOutput(e.target.value)}
           ></textarea>
         </div>
+        
+        {isWarned === 1 && (
+          <div className="fullscreen-alert">
+            <button onClick={enterFullScreen}>Enter Fullscreen Again</button>
+          </div>
+        )}
       </div>
       {loader && (
         <div className="loader-container">
