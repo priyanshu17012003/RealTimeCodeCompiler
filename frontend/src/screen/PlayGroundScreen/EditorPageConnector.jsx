@@ -3,6 +3,7 @@ import "./editorPage.scss";
 import Editor from "@monaco-editor/react";
 import { PlaygroundContext } from "../../Provider/PlaygroundProvider";
 import { SocketContext } from "../../Provider/SocketProvider";
+import { useNavigate } from "react-router-dom";
 
 const EditorPageConnector = ({ roomId, submitCode, saveCode, handleExport }) => {
   const { getDefaultCode, getLanguage, updateLanguage } = useContext(PlaygroundContext);
@@ -54,6 +55,58 @@ const EditorPageConnector = ({ roomId, submitCode, saveCode, handleExport }) => 
     submitCode({ code: codeRef.current, language });
   };
 
+  const enterFullScreen = () => {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      elem.msRequestFullscreen();
+    }
+  };
+
+  const [isWarned, setIsWarned] = useState(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    
+    const handleFullscreenChange = () => {
+      
+      if (!document.fullscreenElement) {
+        if (isWarned === 0) {
+          //alert("You have exited fullscreen. Click 'Enter Fullscreen' to return or you may lose your session.");
+          setIsWarned(1);
+          //setTimeout(enterFullScreen, 100); // Delay to give user a moment to process
+          alert("You have exited fullscreen. Click 'Enter Fullscreen' to return or you may lose your session.");
+
+          setTimeout(()=>{
+              enterFullScreen();    
+          }, 3000)
+          
+        } else if (isWarned === 1) {
+          
+          alert("Session terminated.");
+          navigate("/"); 
+        }
+      }
+    };
+  
+    
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+  
+
+    enterFullScreen();
+  
+    return () => {
+      // Clean up event listeners on component unmount
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, [isWarned, navigate]);
+
+
   return (
     <div className="editor-container">
       <div className="editor-header">
@@ -80,6 +133,11 @@ const EditorPageConnector = ({ roomId, submitCode, saveCode, handleExport }) => 
       </div>
       <div className="editor-footer" style={{margin:0}}>
         <button onClick={handleRunCode}>Run Code</button>
+        {isWarned === 1 && (
+          <div className="fullscreen-alert">
+            <button onClick={enterFullScreen}>Enter Fullscreen Again</button>
+          </div>
+        )}
       </div>
     </div>
   );
