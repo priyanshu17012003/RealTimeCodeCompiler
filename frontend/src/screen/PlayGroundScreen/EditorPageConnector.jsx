@@ -12,8 +12,19 @@ const EditorPageConnector = ({ roomId, submitCode, saveCode, handleExport }) => 
   const [code, setCode] = useState(getDefaultCode());
   const [language, setLanguage] = useState(getLanguage());
   const [theme, setTheme] = useState("vs-dark");
+  const [role, setRole] = useState(null);
   const codeRef = useRef(code);
   const handleOption = { fontSize: "20px" };
+
+  useEffect(() => {
+    socket.on("roleAssigned", ({ role }) => {
+      setRole(role);
+    });
+
+    return () => {
+      socket.off("roleAssigned");
+    };
+  }, [socket]);
 
   useEffect(() => {
     socket.on("codeUpdate", (newCode) => {
@@ -27,7 +38,6 @@ const EditorPageConnector = ({ roomId, submitCode, saveCode, handleExport }) => 
   }, [socket]);
 
   const handleEditorChange = (newCode) => {
-
     codeRef.current = newCode;
     setCode(newCode);
 
@@ -72,40 +82,29 @@ const EditorPageConnector = ({ roomId, submitCode, saveCode, handleExport }) => 
   const navigate = useNavigate();
 
   useEffect(() => {
-    
-    const handleFullscreenChange = () => {
-      
-      if (!document.fullscreenElement) {
-        if (isWarned === 0) {
-          //alert("You have exited fullscreen. Click 'Enter Fullscreen' to return or you may lose your session.");
-          setIsWarned(1);
-          //setTimeout(enterFullScreen, 100); // Delay to give user a moment to process
-          alert("You have exited fullscreen. Click 'Enter Fullscreen' to return or you may lose your session.");
-
-          setTimeout(()=>{
+    if (role === "client") {
+      const handleFullscreenChange = () => {
+        if (!document.fullscreenElement) {
+          if (isWarned === 0) {
+            alert("You have exited fullscreen. Click 'Enter Fullscreen' to return or you may lose your session.");
+            setTimeout(() => {
               enterFullScreen();    
-          }, 3000)
-          
-        } else if (isWarned === 1) {
-          
-          alert("Session terminated.");
-          navigate("/"); 
+            }, 3000);
+            setIsWarned(1);
+          } else if (isWarned === 1) {
+            alert("Session terminated.");
+            navigate("/newHome"); 
+          }
         }
-      }
-    };
-  
-    
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
-  
+      };
 
-    enterFullScreen();
-  
-    return () => {
-      // Clean up event listeners on component unmount
-      document.removeEventListener("fullscreenchange", handleFullscreenChange);
-    };
-  }, [isWarned, navigate]);
+      document.addEventListener("fullscreenchange", handleFullscreenChange);
 
+      return () => {
+        document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      };
+    }
+  }, [isWarned, navigate, role]);
 
   return (
     <div className="editor-container">
@@ -131,13 +130,13 @@ const EditorPageConnector = ({ roomId, submitCode, saveCode, handleExport }) => 
           onChange={handleEditorChange}
         />
       </div>
+      {role === "client" && (
+        <div className="editor-footer" style={{ margin: 0 }}>
+          <button onClick={enterFullScreen}>Enter Fullscreen</button>
+        </div>
+      )}
       <div className="editor-footer" style={{margin:0}}>
         <button onClick={handleRunCode}>Run Code</button>
-        {isWarned === 1 && (
-          <div className="fullscreen-alert">
-            <button onClick={enterFullScreen}>Enter Fullscreen Again</button>
-          </div>
-        )}
       </div>
     </div>
   );

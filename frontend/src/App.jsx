@@ -7,6 +7,7 @@ import { SocketContext } from "./Provider/SocketProvider";
 import { Toaster } from "react-hot-toast";
 import { useContext } from "react";
 import PlaygroundConnector from "./screen/PlayGroundScreen/PlaygroundConnector";
+import NewHome from "./screen/HomeScreen/NewHome";
 
 function App() {
   const { socket } = useContext(SocketContext);
@@ -23,6 +24,7 @@ function App() {
                 path="/playground/:fileId/:folderId"
                 element={<Playground />}
               />
+              <Route path="/newHome" element={<NewHome />} />
             </Routes>
           </BrowserRouter>
         </ProviderModal>

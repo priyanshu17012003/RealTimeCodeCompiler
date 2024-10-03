@@ -6,29 +6,38 @@
   .editor-header,
   .editor-footer {
     background-color: white;
-    flex-shrink: 0;
     color: black;
+    flex-shrink: 0;
   }
 
   .editor-footer {
     display: flex;
     justify-content: space-around;
     padding: 1rem;
+    background-color: #f0f0f0; 
+    position: sticky; 
+    bottom: 0;
+    z-index: 1;
+    border-top: 1px solid #ccc;
+
     .title {
       display: flex;
       gap: 0.8rem;
       font-size: 1.1rem;
       font-weight: bold;
+
       .label {
         position: relative;
         bottom: 5px;
       }
+
       .icons {
         position: relative;
         bottom: -4px;
         right: 10px;
       }
     }
+
     button {
       padding: 0.6rem;
       border-radius: 1.1rem;
@@ -44,16 +53,19 @@
     display: flex;
     justify-content: space-between;
     padding: 0.8rem;
+
     .header-left {
       display: flex;
       align-items: center;
       gap: 1rem;
+
       .title {
         display: flex;
         gap: 1rem;
         font-size: 1.4rem;
         font-weight: bold;
       }
+
       button {
         padding: 0.6rem;
         border-radius: 1.1rem;
@@ -64,9 +76,11 @@
         font-size: 0.9rem;
       }
     }
+
     .header-right {
       display: flex;
       gap: 1rem;
+
       .dropdown-container {
         position: relative;
         display: inline-block;
@@ -91,6 +105,7 @@
             outline: none;
           }
         }
+
         .dropdown option {
           padding: 12px;
           font-size: 16px;
@@ -98,8 +113,10 @@
       }
     }
   }
+
   .editor-body {
     flex-grow: 1;
     background-color: white;
+    overflow-y: auto;
   }
 }

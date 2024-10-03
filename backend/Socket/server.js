@@ -14,9 +14,17 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log("User connected ", socket.id);
 
+  socket.on("registerSocketId", () => {
+    socket.role = "host";
+    console.log(`User ${socket.id} is a host`);
+  });
+
   socket.on("joinRoom", (roomId) => {
     socket.join(roomId);
-    console.log(`User ${socket.id} joined room ${roomId}`);
+    const role="client";
+    socket.role = role;
+    console.log(`User ${socket.id} joined room ${roomId} as ${role}`);
+    socket.emit("roleAssigned", { roomId, role });
   });
 
   socket.on("codeUpdate", ({ roomId, code }) => {
