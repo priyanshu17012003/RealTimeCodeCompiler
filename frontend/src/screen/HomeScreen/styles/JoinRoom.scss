@@ -1,70 +1,70 @@
 
 .modal {
     &-box {
-      padding: 2rem; // Padding for the modal content
-      background-color: white; // Background color for the modal
-      border-radius: 0.5rem; // Rounded corners
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); // Shadow effect
-      display: flex; // Flexbox for layout
-      flex-direction: column; // Column layout for modal content
-      align-items: center; // Center content horizontally
+      padding: 2rem; 
+      background-color: white; 
+      border-radius: 0.5rem; 
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
     }
   
     &-header {
-      font-size: 1.5rem; // Header font size
-      margin-bottom: 1rem; // Margin below the header
+      font-size: 1.5rem; 
+      margin-bottom: 1rem; 
     }
   
     .close-btn {
-      position: absolute; // Position the close button
-      top: 0.5rem; // Distance from the top
-      right: 0.5rem; // Distance from the right
-      background: none; // Remove background
-      border: none; // Remove border
-      cursor: pointer; // Pointer cursor
-      font-size: 1.5rem; // Font size for the close button
+      position: absolute; 
+      top: 0.5rem; 
+      right: 0.5rem; 
+      background: none; 
+      border: none; 
+      cursor: pointer;
+      font-size: 1.5rem; 
     }
   }
   
   .modal-buttons {
-    display: flex; // Flexbox for button alignment
-    justify-content: space-between; // Space between buttons
-    width: 100%; // Full width for alignment
-    margin-top: 1rem; // Margin above the button container
+    display: flex; 
+    justify-content: space-between; 
+    width: 100%; 
+    margin-top: 1rem; 
   
     .btn {
-      flex: 1; // Make buttons flexible
-      margin: 0 0.5rem; // Margin between buttons
-      padding: 0.6rem; // Padding for buttons
-      border: none; // Remove border
-      border-radius: 0.5rem; // Rounded corners
-      background: linear-gradient(90deg, #00bcd4, #673ab7); // Linear gradient
-      color: white; // Text color
-      font-weight: bold; // Font weight
-      font-size: 1rem; // Font size
-      cursor: pointer; // Pointer cursor
-      transition: all 0.3s ease; // Smooth transition for hover effects
-      text-align: center; // Center the text
+      flex: 1; 
+      margin: 0 0.5rem; 
+      padding: 0.6rem; 
+      border: none; 
+      border-radius: 0.5rem; 
+      background: linear-gradient(90deg, #00bcd4, #673ab7); 
+      color: white; 
+      font-weight: bold; 
+      font-size: 1rem; 
+      cursor: pointer; 
+      transition: all 0.3s ease; 
+      text-align: center; 
   
       &:hover {
-        background-color: rgba(255, 255, 255, 0.1); // Lighten background on hover
-        color: white; // Keep text color white on hover
+        background-color: rgba(255, 255, 255, 0.1); 
+        color: white; 
       }
     }
   }
   
   input[type="text"] {
-    width: 100%; // Full width input
-    padding: 0.6rem; // Padding for the input
-    margin-bottom: 1rem; // Margin below the input
-    border: 1px solid #ccc; // Border color
-    border-radius: 0.5rem; // Rounded corners
-    font-size: 1rem; // Font size
-    transition: border-color 0.3s ease; // Smooth transition for border color
+    width: 100%;
+    padding: 0.6rem; 
+    margin-bottom: 1rem; 
+    border: 1px solid #ccc; 
+    border-radius: 0.5rem; 
+    font-size: 1rem; 
+    transition: border-color 0.3s ease; 
   
     &:focus {
-      border-color: #00bcd4; // Border color on focus
-      outline: none; // Remove outline
+      border-color: #00bcd4; 
+      outline: none; 
     }
   }
   
