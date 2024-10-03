@@ -1,0 +1,26 @@
+.new-home-container {
+    display: flex; /* Use flexbox for layout */
+    height: 100vh; /* Full height of the viewport */
+  
+    .left-section {
+      flex: 1; /* Takes up half of the screen */
+      display: flex;
+      flex-direction: column; /* Stack JoinRoom and ShareRoom vertically */
+      padding: 20px; /* Add padding for better spacing */
+      background-color: #f9f9f9; /* Optional background color */
+      border-right: 1px solid #ccc; /* Optional border to separate sections */
+    }
+  
+    .right-section {
+      flex: 1; /* Takes up the other half of the screen */
+      padding: 20px; /* Add padding for better spacing */
+      background-color: #fff; /* Optional background color */
+      overflow-y: auto; /* Allow scrolling if content overflows */
+    }
+  
+    .rules-container {
+      max-height: 100%; /* Ensure it fits in the right section */
+      overflow-y: auto; /* Allow scrolling if content is too long */
+    }
+  }
+  
