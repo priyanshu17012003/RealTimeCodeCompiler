@@ -3,7 +3,13 @@
     padding: 2rem; 
     background-color: white; 
     border-radius: 0.5rem; 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    max-width: 400px; /* Limit max width */
+    width: 90%; /* Responsive width */
+    position: relative; /* Allow absolute positioning of close button */
   }
 
   &-header {
@@ -18,7 +24,7 @@
     background: none; 
     border: none; 
     cursor: pointer; 
-    font-size: 1rem; 
+    font-size: 1.2rem; /* Increase font size for visibility */
   }
 }
 
@@ -29,35 +35,26 @@
   background: linear-gradient(90deg, #00bcd4, #673ab7); 
   color: white; 
   font-weight: bold; 
-  font-size: 0.8rem; 
+  font-size: 0.9rem; /* Slightly larger font size */
   cursor: pointer; 
   transition: all 0.3s ease; 
   text-align: center; 
-  margin:1rem;
+  margin: 0.5rem 0; /* Adjust margin for better spacing */
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.1); 
-    color: white; 
   }
 }
 
-.btn-enter{
+.btn-enter,
+.btn-copy {
   background: linear-gradient(90deg, #00bcd4, #673ab7);
   padding: 0.6rem 1.2rem;
-  color:white;
+  color: white;
   border: none;
   border-radius: 0.5rem;
-  width: 75%;
-}
-
-.btn-copy{
-  background: linear-gradient(90deg, #00bcd4, #673ab7);
-  padding: 0.6rem 1.2rem;
-  color:white;
-  border: none;
-  border-radius: 0.5rem;
-  width: 75%;
-  margin-bottom: 1rem;
+  width: 85%;
+  margin: 0.5rem 0; /* Adjust margin for better spacing */
 }
 
 input[type="text"] {
@@ -73,4 +70,24 @@ input[type="text"] {
     border-color: #8600d4; 
     outline: none; 
   }
+}
+
+// Centering styles
+.dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  width: 100%;
+  position: fixed; /* Ensure it covers the full screen */
+  top: 0; /* Align at the top */
+  left: 0; /* Align at the left */
+  background-color: rgba(0, 0, 0, 0.5); /* Add background overlay */
+}
+
+.modal {
+  position: relative; /* Change to relative for better positioning */
+  top: auto; /* Reset top */
+  left: auto; /* Reset left */
+  transform: translate(0, 0); /* No transform needed here */
 }

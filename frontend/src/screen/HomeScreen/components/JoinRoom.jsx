@@ -38,10 +38,10 @@ function JoinRoom() {
             onChange={(e) => setHostSocketId(e.target.value)}
           />
           <div className="modal-buttons">
-            <button className="btn" onClick={handleConnect}>
+            <button className="btn-connect" onClick={handleConnect}>
               Connect
             </button>
-            <button className="btn" onClick={() => document.getElementById("my_modal_3").close()}>
+            <button className="btn-cancel" onClick={() => document.getElementById("my_modal_3").close()}>
               Cancel
             </button>
           </div>
